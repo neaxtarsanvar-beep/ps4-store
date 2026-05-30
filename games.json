@@ -1,18 +1,12 @@
 [
   {
     "id": 1,
-    "title": "EA Sports FC 24",
-    "category": "Sports",
-    "size": "42 GB",
-    "image": "https://i.imgur.com/w9Z3mX8.png",
-    "download_url": "https://bura-oyunun-yukleme-linki-gelecek.com/fc24.pkg"
-  },
-  {
-    "id": 2,
-    "title": "Grand Theft Auto V",
-    "category": "Action",
-    "size": "65 GB",
-    "image": "https://i.imgur.com/w9Z3mX8.png",
-    "download_url": "https://bura-oyunun-yukleme-linki-gelecek.com/gtav.pkg"
+    "title": "Minecraft: PlayStation 4 Edition",
+    "serial": "CUSA-00265",
+    "category": "Sandbox / Arcade",
+    "size": "1.2 GB",
+    "developer": "4J Studios / Mojang",
+    "image": "https://i.imgur.com/8N4XWqj.png",
+    "download_url": "http://gs2.ww.prod.dl.playstation.net/gs2/ppkgo/prod/CUSA00265_00/325/f_d97db242b12262e26b7ffaebdbf29768dae28e197864ec59d891d3f2d894d578/f/EP4433-CUSA00265_00-MINECRAFTPS40000-A0338-V0100.pkg"
   }
 ]
