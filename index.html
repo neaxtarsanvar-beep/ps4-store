@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 Homebrew Store</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b1119; color: white; margin: 0; padding: 20px; text-align: center; }
+        .header { background: linear-gradient(90deg, #003087, #0070d8); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .search-box { width: 80%; max-width: 500px; padding: 12px; border-radius: 25px; border: 2px solid #0070d8; background: #121924; color: white; font-size: 16px; outline: none; margin-bottom: 20px; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card { background: #16202c; border-radius: 10px; width: 250px; padding: 15px; text-align: left; box-shadow: 0 5px 10px rgba(0,0,0,0.3); border-bottom: 4px solid #0070d8; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
+        .card h3 { margin: 10px 0 5px 0; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card p { margin: 0; color: #888; font-size: 14px; }
+        .btn-download { background: #0070d8; color: white; text-align: center; padding: 10px; border-radius: 5px; display: block; text-decoration: none; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        
+        /* Yükləmə Ekranı (Pop-up) */
+        .download-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 17, 25, 0.95); justify-content: center; align-items: center; flex-direction: column; z-index: 1000; }
+        .progress-bar-container { width: 70%; background: #222; border-radius: 10px; height: 20px; margin-top: 20px; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: #00cf00; transition: width 0.1s; }
+        .btn-close { background: #ff3333; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 style="margin:0;">🎮 PS4 FREE STORE 🎮</h1>
+        <p style="margin:5px 0 0 0; color: #b3d4ff;">Sıfır Xərcli Oyun Platforması</p>
+    </div>
+
+    <input type="text" id="search" class="search-box" placeholder="Oyun adı axtar..." onkeyup="filterGames()">
+
+    <div class="grid" id="game-container">Loading...</div>
+
+    <div id="download-screen" class="download-overlay">
+        <h2 id="downloading-title">Oyun Yüklənir...</h2>
+        <p id="download-status">Hazırlanır...</p>
+        <div class="progress-bar-container">
+            <div id="progress" class="progress-bar"></div>
+        </div>
+        <button class="btn-close" onclick="closeDownload()">Geri Qayıt</button>
+    </div>
+
+    <script>
+        let allGames = [];
+
+        // Bazadan oyunları çəkirik
+        fetch('games.json')
+            .then(res => res.json())
+            .then(data => {
+                allGames = data;
+                displayGames(allGames);
+            });
+
+        function displayGames(games) {
+            let html = '';
+            games.forEach(game => {
+                html += `
+                    <div class="card">
+                        <img src="${game.image}" alt="game">
+                        <h3>${game.title}</h3>
+                        <p><b>Ölçü:</b> ${game.size}</p>
+                        <p><b>Janr:</b> ${game.category}</p>
+                        <div class="btn-download" onclick="startDownload('${game.title}')">Yüklə (PKG)</div>
+                    </div>
+                `;
+            });
+            document.getElementById('game-container').innerHTML = html || '<p>Oyun tapılmadı.</p>';
+        }
+
+        // Axtarış funksiyası
+        function filterGames() {
+            let query = document.getElementById('search').value.toLowerCase();
+            let filtered = allGames.filter(g => g.title.toLowerCase().includes(query));
+            displayGames(filtered);
+        }
+
+        // Yükləmə Simulyasiyası
+        function startDownload(title) {
+            document.getElementById('download-screen').style.display = 'flex';
+            document.getElementById('downloading-title').innerText = title + " yüklənir...";
+            
+            let percent = 0;
+            let interval = setInterval(() => {
+                percent += 1;
+                document.getElementById('progress').style.width = percent + '%';
+                document.getElementById('download-status').innerText = percent + "% Yükləndi... Xahiş edirik konsolu söndürməyin.";
+                
+                if(percent >= 100) {
+                    clearInterval(interval);
+                    document.getElementById('download-status').innerText = "Yükləmə tamamlandı! Oyun əsas ekrana əlavə olundu.";
+                }
+            }, 100); // Sürəti burdan tənzimləmək olar
+        }
+
+        function closeDownload() {
+            document.getElementById('download-screen').style.display = 'none';
+            document.getElementById('progress').style.width = '0%';
+        }
+    </script>
+
+</body>
+</html>
