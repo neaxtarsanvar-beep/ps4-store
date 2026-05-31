@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>Odlar Yurdu Store</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .card { background: white; padding: 15px; margin: 10px; border-radius: 8px; box-shadow: 0 2px 5px #ccc; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Odlar Yurdu Store</h1>
+    <div id="store"></div>
+
+    <script>
+        fetch('games.json')
+            .then(response => response.json())
+            .then(data => {
+                const store = document.getElementById('store');
+                data.forEach(g => {
+                    store.innerHTML += `
+                        <div class="card">
+                            <h3>${g.title}</h3>
+                            <a href="${g.base}" download><button>Base Game</button></a>
+                            <a href="${g.update}" download><button>Update</button></a>
+                        </div>
+                    `;
+                });
+            });
+    </script>
+</body>
+</html>
