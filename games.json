@@ -1,27 +1,12 @@
-{
-  "A Way Out": {
-    "Base": "https://archive.org/download/ps4-fpkg-collection-english-a/A_Way_Out.pkg",
-    "Update": "https://archive.org/download/ps4-fpkg-collection-english-a/A_Way_Out_Update_1.01.pkg",
-    "DLC": "Yoxdur"
-  },
-  "Assassin's Creed Odyssey": {
-    "Base": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassins_Creed_Odyssey.pkg",
-    "Update": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassins_Creed_Odyssey_Update_1.50.pkg",
-    "DLC": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassins_Creed_Odyssey_DLC_Pack.pkg"
-  },
-  "Batman Arkham Knight": {
-    "Base": "https://archive.org/download/ps4-fpkg-collection-english-b/Batman_Arkham_Knight.pkg",
-    "Update": "https://archive.org/download/ps4-fpkg-collection-english-b/Batman_Arkham_Knight_Update_1.14.pkg",
-    "DLC": "https://archive.org/download/ps4-fpkg-collection-english-b/Batman_Arkham_Knight_DLC_Pack.pkg"
-  },
-  "Bloodborne": {
-    "Base": "https://archive.org/download/ps4-fpkg-collection-english-b/Bloodborne.pkg",
-    "Update": "https://archive.org/download/ps4-fpkg-collection-english-b/Bloodborne_Update_1.09.pkg",
-    "DLC": "https://archive.org/download/ps4-fpkg-collection-english-b/Bloodborne_Old_Hunters_DLC.pkg"
-  },
-  "God of War": {
-    "Base": "https://archive.org/download/ps4-fpkg-collection-english-g/God_of_War.pkg",
-    "Update": "https://archive.org/download/ps4-fpkg-collection-english-g/God_of_War_Update_1.34.pkg",
-    "DLC": "Yoxdur"
+[
+  {
+    "id": 1,
+    "title": "Minecraft: PlayStation 4 Edition",
+    "serial": "CUSA-00265",
+    "category": "Sandbox / Arcade",
+    "size": "1.2 GB",
+    "developer": "4J Studios / Mojang",
+    "image": "https://i.imgur.com/8N4XWqj.png",
+    "download_url": "http://gs2.ww.prod.dl.playstation.net/gs2/ppkgo/prod/CUSA00265_00/325/f_d97db242b12262e26b7ffaebdbf29768dae28e197864ec59d891d3f2d894d578/f/EP4433-CUSA00265_00-MINECRAFTPS40000-A0338-V0100.pkg"
   }
-}
+]
