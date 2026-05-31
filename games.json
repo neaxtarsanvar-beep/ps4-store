@@ -1,4 +1,4 @@
-games_data = [
+
     {
         "id": 1,
         "title": "A Way Out",
@@ -47,4 +47,4 @@ games_data = [
         "size": "15.3 GB",
         "download_url": "https://archive.org/download/ps4-fpkg-collection-english-a/Assetto_Corsa.pkg"
     }
-]
+
