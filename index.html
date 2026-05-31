@@ -1,44 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odlar Yurdu Store</title>
+    <title>Odlar Yurdu Store - Global PS4 Portal</title>
     <style>
-        body { background-color: #060913; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
-        header { background: linear-gradient(90deg, #002244, #0044ff); padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 20px #00a2ff; }
-        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .card { background-color: #111625; border: 1px solid #1f2a47; border-radius: 12px; padding: 20px; text-align: center; transition: 0.3s; }
-        .card:hover { border-color: #00a2ff; transform: translateY(-5px); }
-        .title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-        .meta { color: #707a94; font-size: 14px; margin-bottom: 15px; }
-        .btn { display: block; background: linear-gradient(90deg, #0043ff, #00a2ff); color: white; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        /* Qlobal Qaranlıq və Alov Mövzusu */
+        body { 
+            background-color: #03050a; 
+            color: white; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; 
+            padding: 20px;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% -20%, #2b0c02 0%, #03050a 60%);
+        }
+
+        /* Alovlu Neon Header */
+        header { 
+            background: linear-gradient(135deg, #120502, #260a02);
+            padding: 30px; 
+            text-align: center; 
+            border-radius: 16px; 
+            margin-bottom: 40px; 
+            border: 2px solid #ff4500;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.4), inset 0 0 15px rgba(255, 69, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🔥';
+            position: absolute;
+            left: 20px;
+            top: 25px;
+            font-size: 30px;
+            animation: burn 1.5s infinite alternate;
+        }
+
+        header::after {
+            content: '🔥';
+            position: absolute;
+            right: 20px;
+            top: 25px;
+            font-size: 30px;
+            animation: burn 1.5s infinite alternate-reverse;
+        }
+
+        .logo { 
+            font-size: 36px; 
+            font-weight: 900; 
+            letter-spacing: 4px; 
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000;
+            animation: pulse 2s infinite;
+        }
+
+        .subtitle {
+            color: #ffaa73;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Oyun Kartları Grid Sistemi */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+
+        /* Peşəkar Alovlu Kart Dizaynı */
+        .card { 
+            background: linear-gradient(185deg, #111524 0%, #0b0e1a 100%); 
+            border: 1px solid #222b45; 
+            border-radius: 16px; 
+            padding: 0; 
+            text-align: center; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Üst Vizual Hissə */
+        .card-banner {
+            height: 140px;
+            background: linear-gradient(45deg, #ff4500, #ff0055);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .card-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #111524, transparent);
+        }
+
+        /* Kartın Üzərinə Gələndə (Hover) Effekti */
+        .card:hover { 
+            border-color: #ff4500; 
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.3);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .title { 
+            font-size: 20px; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .meta { 
+            display: inline-block;
+            background-color: #1e2538;
+            color: #ffaa73; 
+            font-size: 13px; 
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 8px;
+            margin-bottom: 20px; 
+            border: 1px solid #2c3854;
+        }
+
+        /* Premium Alovlu Yükləmə Düyməsi */
+        .btn { 
+            display: block; 
+            background: linear-gradient(90deg, #ff0055 0%, #ff4500 100%); 
+            color: white; 
+            text-align: center; 
+            padding: 14px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 15px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover { 
+            box-shadow: 0 0 25px #ff4500;
+            transform: scale(1.03);
+        }
+
+        /* Animasiyalar */
+        @keyframes burn {
+            0% { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 5px #ff4500); }
+            100% { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 15px #ff0000); }
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00; }
+            50% { text-shadow: 0 0 15px #ff4500, 0 0 30px #ff8c00, 0 0 40px #ff0000; }
+            100% { text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">🎮 ODLAR YURDU STORE</div>
+        <div class="logo">ODLAR YURDU STORE</div>
+        <div class="subtitle">🔥 Global Fake PKG Ecosystem 🔥</div>
     </header>
 
     <div class="grid" id="main-grid"></div>
 
     <script>
-        // ARCHIVE.ORG-DAN TAPDIĞIN OYUNLARI BURA ƏLAVƏ ET
-        // İstədiyin qədər oyunu aşağıdakı formatda vergül qoyaraq artıra bilərsən
+        // ARCHIVE.ORG-DAN TAPDIĞIN REAL OYUNLARI BURA ATIRSAN, ÖZÜ AVTOMATİK KART YARADIR
         const games = [
             {
                 title: "Grand Theft Auto V",
-                region: "EUR",
+                region: "EUR (CUSA00411)",
                 size: "68.2 GB",
-                url: "https://archive.org/download/bura-oz-tapdigin-linki-qoyursan.pkg"
+                icon: "🚗", // İstəsən bura gələcəkdə real şəkil linki də qoya bilərsən
+                url: "https://archive.org/download/bura-oz-gta-linkini-qoyursan.pkg"
             },
             {
-                title: "Minecraft PS4",
-                region: "USA",
+                title: "Minecraft PS4 Edition",
+                region: "USA (CUSA00265)",
                 size: "1.4 GB",
-                url: "https://archive.org/download/bura-ikinci-oyun-linkini-qoyursan.pkg"
+                icon: "📦",
+                url: "https://archive.org/download/bura-oz-minecraft-linkini-qoyursan.pkg"
             }
         ];
 
@@ -46,9 +206,12 @@
         games.forEach(g => {
             container.innerHTML += `
                 <div class="card">
-                    <div class="title">${g.title}</div>
-                    <div class="meta">🌍 ${g.region} | 💾 ${g.size}</div>
-                    <a href="${g.url}" target="_blank" class="btn">Download PKG</a>
+                    <div class="card-banner">${g.icon}</div>
+                    <div class="card-content">
+                        <div class="title" title="${g.title}">${g.title}</div>
+                        <div class="meta">${g.region} | 💾 ${g.size}</div>
+                        <a href="${g.url}" target="_blank" class="btn">DOWNLOAD FPKG</a>
+                    </div>
                 </div>
             `;
         });
