@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odlar Yurdu Store</title>
+    <style>
+        body { background-color: #060913; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+        header { background: linear-gradient(90deg, #002244, #0044ff); padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 20px #00a2ff; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background-color: #111625; border: 1px solid #1f2a47; border-radius: 12px; padding: 20px; text-align: center; transition: 0.3s; }
+        .card:hover { border-color: #00a2ff; transform: translateY(-5px); }
+        .title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .meta { color: #707a94; font-size: 14px; margin-bottom: 15px; }
+        .btn { display: block; background: linear-gradient(90deg, #0043ff, #00a2ff); color: white; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🎮 ODLAR YURDU STORE</div>
+    </header>
+
+    <div class="grid" id="main-grid"></div>
+
+    <script>
+        // ARCHIVE.ORG-DAN TAPDIĞIN OYUNLARI BURA ƏLAVƏ ET
+        // İstədiyin qədər oyunu aşağıdakı formatda vergül qoyaraq artıra bilərsən
+        const games = [
+            {
+                title: "Grand Theft Auto V",
+                region: "EUR",
+                size: "68.2 GB",
+                url: "https://archive.org/download/bura-oz-tapdigin-linki-qoyursan.pkg"
+            },
+            {
+                title: "Minecraft PS4",
+                region: "USA",
+                size: "1.4 GB",
+                url: "https://archive.org/download/bura-ikinci-oyun-linkini-qoyursan.pkg"
+            }
+        ];
+
+        const container = document.getElementById('main-grid');
+        games.forEach(g => {
+            container.innerHTML += `
+                <div class="card">
+                    <div class="title">${g.title}</div>
+                    <div class="meta">🌍 ${g.region} | 💾 ${g.size}</div>
+                    <a href="${g.url}" target="_blank" class="btn">Download PKG</a>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
