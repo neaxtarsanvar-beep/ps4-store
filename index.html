@@ -5,136 +5,293 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odlar Yurdu Store</title>
     <style>
-        :root { --neon: #45f3ff; --bg: #0b0c10; --card: #1f2833; }
-        body { background-color: var(--bg); color: #fff; font-family: sans-serif; margin: 0; padding: 20px; }
+        /* ==========================================================================
+           1. RƏNG VƏ DIZAYN AYARLARI (İstəsən rəngləri buradan dəyişə bilərsən)
+           ========================================================================== */
+        :root {
+            --ps-blue: #003087;    /* PlayStation Göyü */
+            --ps-dark: #0a0f1d;    /* Arxa fon rəngi */
+            --ps-card: #141b2d;    /* Oyun kartlarının rəngi */
+            --ps-neon: #00f0ff;    /* Neon rəng (Axtarış və haşiyələr) */
+        }
         
-        /* Üst Menyu və Naviqasiya */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: var(--card); border-radius: 10px; margin-bottom: 20px; }
-        .logo { font-size: 1.5em; font-weight: bold; color: var(--neon); text-shadow: 0 0 10px var(--neon); }
-        
-        /* Axtarış Yeri */
-        .search-box { background: #000; border: 1px solid var(--neon); padding: 10px; border-radius: 5px; color: #fff; width: 250px; outline: none; }
-        
-        /* Yüklənənlər Paneli */
-        .download-badge { background: #ff3366; padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: bold; cursor: pointer; }
+        body {
+            background-color: var(--ps-dark);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .game-card { background: var(--card); border-radius: 10px; width: 200px; padding: 15px; text-align: center; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .game-card:hover { border-color: var(--neon); transform: translateY(-5px); }
-        .game-img { width: 100%; height: 240px; object-fit: cover; border-radius: 5px; }
-        .game-title { font-size: 1em; margin: 10px 0; font-weight: bold; height: 40px; overflow: hidden; }
+        /* Yuxarı Panel */
+        .header {
+            background: var(--ps-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            border-bottom: 2px solid var(--ps-neon);
+        }
+        .store-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px #fff;
+        }
+        .search-bar {
+            background: #000;
+            border: 1px solid var(--ps-neon);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: #fff;
+            width: 300px;
+            outline: none;
+            font-size: 0.9em;
+        }
 
-        /* DETALLI OYUN PƏNCƏRƏSİ (MODAL) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: var(--card); padding: 25px; border-radius: 15px; border: 2px solid var(--neon); width: 80%; max-width: 500px; text-align: left; position: relative; }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; color: var(--neon); }
-        
-        /* DLC və Update Düymələri */
-        .sub-section { margin-top: 15px; border-top: 1px solid #333; padding-top: 10px; }
-        .sub-title { color: #c5a880; font-size: 0.9em; font-weight: bold; margin-bottom: 5px; }
-        .dlc-btn { display: flex; justify-content: space-between; align-items: center; background: #000; padding: 8px 12px; margin-bottom: 5px; border-radius: 5px; font-size: 0.9em; border: 1px solid #333; }
-        .btn-dl { background: var(--neon); color: #000; padding: 4px 10px; border-radius: 3px; text-decoration: none; font-weight: bold; font-size: 0.8em; }
+        /* Əsas Korpus */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sol Menyu */
+        .sidebar {
+            width: 220px;
+            background: var(--ps-card);
+            padding: 20px 10px;
+            border-right: 1px solid #1f2937;
+        }
+        .menu-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.02);
+        }
+        .menu-item:hover, .menu-item.active {
+            background: var(--ps-blue);
+            color: var(--ps-neon);
+            border-left: 4px solid var(--ps-neon);
+        }
+
+        /* Sağ Oyun Sahəsi */
+        .games-grid {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            overflow-y: auto;
+            align-content: flex-start;
+        }
+
+        /* Oyun Kartları */
+        .game-card {
+            background: var(--ps-card);
+            border-radius: 10px;
+            width: 170px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .game-card:hover {
+            border-color: var(--ps-neon);
+            transform: scale(1.04);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+        .game-thumb {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .game-name {
+            font-size: 0.95em;
+            margin-top: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Pəncərə (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+        .modal-box {
+            background: var(--ps-card);
+            border: 2px solid var(--ps-neon);
+            border-radius: 14px;
+            width: 460px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+        }
+        .close-btn {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 1.6em; cursor: pointer; color: var(--ps-neon);
+        }
+        .pkg-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #2d3748;
+        }
+        .dl-btn {
+            background: var(--ps-neon);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: 0.2s;
+        }
+        .dl-btn:hover {
+            background: #fff;
+        }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="logo">ODLAR YURDU STORE</div>
-        <input type="text" id="search" class="search-box" placeholder="🔍 Oyun axtar..." onkeyup="axtarisEt()">
-        <div class="download-badge" onclick="alert('Yükləmələr PS4 Bildirişlər (Notifications) bölməsinə göndərilir!')">📥 YÜKLƏNƏNLƏR</div>
+    <div class="header">
+        <div class="store-title" id="cfg-magaza-adi">YÜKLƏNİR...</div>
+        <div>
+            <input type="text" id="search" class="search-bar" placeholder="Oyun adı yazaraq axtar..." onkeyup="axtaris()">
+        </div>
     </div>
 
-    <div class="container" id="game-container"></div>
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="menu-item active">Bütün Oyunlar</div>
+            <div class="menu-item" onclick="alert('Yükləmələr PS4 daxili Notifications (Bildirişlər) bölməsində icra olunur!')">Yüklənənlər</div>
+            <div class="menu-item" id="cfg-sahib">Sahib: ...</div>
+        </div>
 
-    <div class="modal" id="gameModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="pencereniBagla()">&times;</span>
-            <h2 id="modalTitle" style="color: var(--neon); margin-top: 0;">Oyun Adı</h2>
+        <div class="games-grid" id="grid"></div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="bagla()">&times;</span>
+            <h3 id="m-title" style="color:var(--ps-neon); margin-top:0; font-size:1.3em;">Oyun</h3>
             
-            <div class="dlc-btn" style="border-color: var(--neon);">
-                <span><b>ANA OYUN (Base Game)</b></span>
-                <a id="mainLink" href="#" class="btn-dl" onclick="arxaPlanaKec()">YÜKLƏ</a>
+            <div class="pkg-row" style="border-color: var(--ps-neon); background: #0f1423;">
+                <span><b>ANA OYUN (.PKG)</b></span>
+                <a id="m-main" href="#" class="btn-dl" onclick="dl()">YÜKLƏ</a>
             </div>
 
-            <div class="sub-section">
-                <div class="sub-title">YENİLƏMƏLƏR (UPDATES)</div>
-                <div id="updatesList"></div>
-            </div>
-
-            <div class="sub-section">
-                <div class="sub-title">ƏLAVƏLƏR (DLCs)</div>
-                <div id="dlcsList"></div>
+            <div style="margin-top:20px;">
+                <span style="font-size:0.85em; color:#9ca3af; font-weight:bold; letter-spacing:1px;">UPDATES & DLCS</span>
+                <div id="m-list"></div>
             </div>
         </div>
     </div>
 
     <script>
-        let butunOyunlar = [];
+        const MAĞAZA_AYARLARI = {
+            magaza_adi: "🔥 ODLAR YURDU STORE 🔥", // Mağazanın başlığı
+            sahib_adi: "Ümüd",                     // Sol menyuda görünəcək adın
+            json_fayli: "oyunlar.json"            // Oxunacaq JSON faylının adı
+        };
 
-        // JSON-u Oxumaq
-        fetch('oyunlar.json')
+        // Ayarları ekrana tətbiq edirik
+        document.getElementById('cfg-magaza-adi').innerText = MAĞAZA_AYARLARI.magaza_adi;
+        document.getElementById('cfg-sahib').innerText = "Sahib: " + MAĞAZA_AYARLARI.sahib_adi;
+
+        let oyunBaza = [];
+
+        // JSON məlumatını çəkirik
+        fetch(MAĞAZA_AYARLARI.json_fayli)
             .then(res => res.json())
             .then(data => {
-                butunOyunlar = data;
-                ekranaDuz(butunOyunlar);
+                oyunBaza = data;
+                goster(oyunBaza);
+            })
+            .catch(err => {
+                console.error("Məlumat bazası tapılmadı:", err);
+                document.getElementById('grid').innerHTML = "<p style='color:red;'>XƏTA: oyunlar.json faylı oxunmadı!</p>";
             });
 
-        function ekranaDuz(oyunlar) {
-            const container = document.getElementById('game-container');
-            container.innerHTML = "";
-            oyunlar.forEach(oyun => {
-                const card = document.createElement('div');
+        // Oyunları ekrana düzən funksiya
+        document.addEventListener('keyup', (e) => { if(e.key === "Escape") bagla(); });
+        function goster(list) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = "";
+            if(list.length === 0) {
+                grid.innerHTML = "<p style='color:#666;'>Heç bir oyun tapılmadı.</p>";
+                return;
+            }
+            list.forEach(o => {
+                let card = document.createElement('div');
                 card.className = 'game-card';
-                card.onclick = () => pencereAc(oyun);
+                card.onclick = () => ac(o);
                 card.innerHTML = `
-                    <img class="game-img" src="${oyun.sekil}">
-                    <div class="game-title">${oyun.ad}</div>
+                    <img class="game-thumb" src="${o.sekil || 'https://via.placeholder.com/160x220'}">
+                    <div class="game-name">${o.ad}</div>
                 `;
-                container.appendChild(card);
+                grid.appendChild(card);
             });
         }
 
-        /* 1. AXTARIŞ FUNKSİYASI */
-        function axtarisEt() {
-            let söz = document.getElementById('search').value.toLowerCase();
-            let filtrlənmiş = butunOyunlar.filter(o => o.ad.toLowerCase().includes(söz));
-            ekranaDuz(filtrlənmiş);
+        // Canlı Axtarış funksiyası
+        function axtaris() {
+            let val = document.getElementById('search').value.toLowerCase();
+            let fil = oyunBaza.filter(o => o.ad.toLowerCase().includes(val));
+            goster(fil);
         }
 
-        /* 2. DAXİLİ SEÇİMLƏR (DLC/UPDATE) PƏNCƏRƏSİ */
-        function pencereAc(oyun) {
-            document.getElementById('modalTitle').innerText = oyun.ad;
-            document.getElementById('mainLink').href = oyun.ana_pkg;
+        // Oyun pəncərəsini açmaq
+        function ac(o) {
+            document.getElementById('m-title').innerText = o.ad;
+            document.getElementById('m-main').href = o.ana_pkg;
             
-            // Updates təmizlə və doldur
-            const upList = document.getElementById('updatesList');
-            upList.innerHTML = oyun.updates.length ? "" : "<p style='color:#666; font-size:0.85em;'>Yeniləmə yoxdur.</p>";
-            oyun.updates.forEach(up => {
-                upList.innerHTML += `<div class="dlc-btn"><span>${up.ad}</span><a href="${up.link}" class="btn-dl" onclick="arxaPlanaKec()">YÜKLƏ</a></div>`;
-            });
-
-            // DLCs təmizlə və doldur
-            const dlcList = document.getElementById('dlcsList');
-            dlcList.innerHTML = oyun.dlcs.length ? "" : "<p style='color:#666; font-size:0.85em;'>DLC yoxdur.</p>";
-            oyun.dlcs.forEach(dlc => {
-                dlcList.innerHTML += `<div class="dlc-btn"><span>${dlc.ad}</span><a href="${dlc.link}" class="btn-dl" onclick="arxaPlanaKec()">YÜKLƏ</a></div>`;
-            });
-
-            document.getElementById('gameModal').style.display = 'flex';
+            let listHtml = "";
+            if(o.updates && o.updates.length > 0) {
+                o.updates.forEach(u => {
+                    listHtml += `<div class="pkg-row"><span>${u.ad}</span><a href="${u.link}" class="btn-dl" onclick="dl()">YÜKLƏ</a></div>`;
+                });
+            }
+            if(o.dlcs && o.dlcs.length > 0) {
+                o.dlcs.forEach(d => {
+                    listHtml += `<div class="pkg-row"><span>${d.ad}</span><a href="${d.link}" class="btn-dl" onclick="dl()">YÜKLƏ</a></div>`;
+                });
+            }
+            
+            document.getElementById('m-list').innerHTML = listHtml || "<p style='color:#555;font-size:0.85em;margin-top:8px;'>Bu oyun üçün əlavə paket yoxdur.</p>";
+            document.getElementById('modal').style.display = 'flex';
         }
 
-        function pencereniBagla() {
-            document.getElementById('gameModal').style.display = 'none';
-        }
-
-        /* 3. ARXA PLANA KEÇİB YÜKLƏMƏ FUNKSİYASI */
-        function arxaPlanaKec() {
-            // PS4 daxilində (.pkg) linkinə kliklədikdə sistem avtomatik tətbiqi arxa plana atır
-            // və yükləməni "Notifications -> Downloads" bölməsinə əlavə edir.
-            // İstifadəçiyə proqramdan çıxa biləcəyini xatırladırıq:
-            setTimeout(() => {
-                alert("Yükləmə başladıldı! PS4 menyusuna qayıdıb 'Notifications' bölməsindən baxa bilərsiniz.");
-            }, 500);
+        // Pəncərəni bağlamaq
+        function bagla() { document.getElementById('modal').style.display = 'none'; }
+        
+        // Yükləmə bildirişi xatırlatması
+        function dl() { 
+            setTimeout(() => { 
+                alert("Yükləmə başladıldı! Tətbiqdən çıxa bilərsiniz, proses PS4 arxa planında davam edir."); 
+            }, 300); 
         }
     </script>
 </body>
