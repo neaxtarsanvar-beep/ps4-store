@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odlar Yurdu Store</title>
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #45f3ff;
+            text-shadow: 0 0 15px #45f3ff;
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            color: #c5a880;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px;
+        }
+        .game-card {
+            background: #1f2833;
+            border: 2px solid #1f2833;
+            border-radius: 12px;
+            width: 220px;
+            padding: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+            transition: 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .game-card:hover {
+            border-color: #45f3ff;
+            transform: translateY(-8px);
+            box-shadow: 0 6px 25px rgba(69, 243, 255, 0.3);
+        }
+        .game-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .game-title {
+            font-size: 1.1em;
+            margin: 15px 0 10px 0;
+            font-weight: bold;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+        .btn-download {
+            display: block;
+            background: #45f3ff;
+            color: #000000;
+            padding: 12px 0;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95em;
+            transition: 0.2s;
+        }
+        .btn-download:hover {
+            background: #0b0c10;
+            color: #45f3ff;
+            border: 1px solid #45f3ff;
+        }
+        .loading {
+            font-size: 1.5em;
+            color: #45f3ff;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔥 ODLAR YURDU STORE 🔥</h1>
+    <div class="subtitle">PS4 Tam FPKG Kolleksiyası Mağazası</div>
+    <hr style="border: 1px solid #1f2833; width: 85%; margin-bottom: 40px;">
+
+    <div id="loading" class="loading">Arxivdən bütün oyunlar gətirilir, zəhmət olmasa gözləyin...</div>
+
+    <div class="container" id="game-container"></div>
+
+    <script>
+        // Sənin mənə göndərdiyin rəsmi arxivin API linki
+        const archiveAPI = "https://archive.org/metadata/ps4-fpkg-collection-english-a";
+        const downloadBase = "https://archive.org/download/ps4-fpkg-collection-english-a/";
+
+        // Standart oyun şəkli (Hər oyun üçün internetdən avtomatik oyun posteri əvəzi)
+        const defaultImg = "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400";
+
+        async function oyunlariGetir() {
+            try {
+                const response = await fetch(archiveAPI);
+                const data = await response.json();
+                const files = data.files;
+                
+                const container = document.getElementById('game-container');
+                document.getElementById('loading').style.display = 'none'; // Yükləndi yazısını silirik
+
+                // Siyahıdakı hər bir faylı yoxlayırıq
+                files.forEach(file => {
+                    // Yalnız sonu .pkg ilə bitən real oyun fayllarını seçirik
+                    if (file.name.endsWith('.pkg')) {
+                        
+                        // Faylın adını təmizləyib oyun adı edirik
+                        let oyunAdi = file.name.replace(/%20/g, " ").replace(".pkg", "");
+                        let yuklemeLinki = downloadBase + file.name;
+
+                        // Vizual kartı yaradırıq
+                        const card = document.createElement('div');
+                        card.className = 'game-card';
+                        
+                        card.innerHTML = `
+                            <img class="game-img" src="${defaultImg}" alt="PS4 Game">
+                            <div class="game-title">${oyunAdi}</div>
+                            <a href="${yuklemeLinki}" class="btn-download">PKG YÜKLƏ</a>
+                        `;
+                        
+                        container.appendChild(card);
+                    }
+                });
+            } catch (error) {
+                document.getElementById('loading').innerText = "Oyunlar yüklənərkən xəta baş verdi.";
+                console.error(error);
+            }
+        }
+
+        // Səhifə açılanda funksiyanı işə sal
+        oyunlariGetir();
+    </script>
+
+</body>
+</html>
