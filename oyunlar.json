@@ -1,27 +1,50 @@
 [
   {
-    "ad": "Alan Wake Remastered",
-    "link": "https://archive.org/download/ps4-fpkg-collection-english-a/Alan%20Wake%20Remastered%20%5BCUSA28469%5D%20v1.02%20%5B5.05-9.00%5D.pkg",
-    "sekil": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"
+    "id": "a_hat_in_time",
+    "ad": "A Hat in Time",
+    "sekil": "https://gcdn.thunderstore.io/live/repository/icons/A_Hat_In_Time_Modding-Hat-In-Time-Modding-Community-1.0.0.png",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/A%20Hat%20in%20Time%20-%20%5BUS%5D%20%5BEN%5D%20%5B1.04%5D.pkg",
+    "updates": [],
+    "dlcs": []
   },
   {
-    "ad": "Alien: Isolation",
-    "link": "https://archive.org/download/ps4-fpkg-collection-english-a/Alien%20Isolation%20%5BCUSA00372%5D%20v1.12%20%5B5.05-9.00%5D.pkg",
-    "sekil": "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400"
+    "id": "a_monsters_expedition",
+    "ad": "A Monster's Expedition",
+    "sekil": "https://images.squarespace-cdn.com/content/v1/52e276b1e4b010b938092285/1598453472018-2O56UEMHFEOCN71OEQN8/KeyArt_NoLogo.jpg",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/A%20Monster%27s%20Expedition%20-%20%5BEU%5D%20%5BEN%5D%20%5B1.03%5D.pkg",
+    "updates": [],
+    "dlcs": []
   },
   {
-    "ad": "Anthem (PS4)",
-    "link": "https://archive.org/download/ps4-fpkg-collection-english-a/Anthem%20%5BCUSA01559%5D%20v1.00%20%5B5.05-9.00%5D.pkg",
-    "sekil": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400"
+    "id": "a_plague_tale_innocence",
+    "ad": "A Plague Tale: Innocence",
+    "sekil": "https://m.media-amazon.com/images/M/MV5BMjA1YjNlNzgtMmU5Ny00YmU2LTg4N2YtZTM1NGEwZGVmNDkyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/A%20Plague%20Tale%20Innocence%20-%20%5BEU%5D%20%5BEN%5D%20%5B1.09%5D.pkg",
+    "updates": [],
+    "dlcs": []
   },
   {
-    "ad": "Assassin's Creed Chronicles",
-    "link": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassins%20Creed%20Chronicles%20Trilogy%20%5BCUSA03411%5D%20v1.01%20%5B5.05-9.00%5D.pkg",
-    "sekil": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400"
+    "id": "a_short_hike",
+    "ad": "A Short Hike",
+    "sekil": "https://cdn.cloudflare.steamstatic.com/steam/apps/1055540/header.jpg",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/A%20Short%20Hike%20-%20%5BEU%5D%20%5BEN%5D%20%5B1.01%5D.pkg",
+    "updates": [],
+    "dlcs": []
   },
   {
-    "ad": "Assassin's Creed Odyssey",
-    "link": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassins%20Creed%20Odyssey%20%5BCUSA12531%5D%20v1.00%20%5B5.05-9.00%5D.pkg",
-    "sekil": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400"
+    "id": "a_way_out",
+    "ad": "A Way Out",
+    "sekil": "https://m.media-amazon.com/images/M/MV5BNDA1Yjg1M2UtYTdkMS00YWUwLTg2YTAtN2Y4MTI1NTg5NWRjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/A%20Way%20Out%20-%20%5BUS%5D%20%5BEN%5D%20%5B1.01%5D.pkg",
+    "updates": [],
+    "dlcs": []
+  },
+  {
+    "id": "ac_valhalla",
+    "ad": "Assassin's Creed Valhalla",
+    "sekil": "https://m.media-amazon.com/images/M/MV5BMmEyZTU4YTUtZTU1Mi00ZTIwLWFhOTEtMzk0Zjg1YzA4NzhhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "ana_pkg": "https://archive.org/download/ps4-fpkg-collection-english-a/Assassin%27s%20Creed%20Valhalla%20-%20%5BEU%5D%20%5BEN%5D%20%5B8.00%5D.pkg",
+    "updates": [],
+    "dlcs": []
   }
 ]
