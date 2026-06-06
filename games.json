@@ -1,0 +1,19 @@
+{
+  "store_name": "🔥 Odlar Yurdu Store",
+  "version": "1.0.0",
+  "categories": [
+    {"id": "ps4_games", "name": "🎮 PS4 Oyunları"},
+    {"id": "dlc_updates", "name": "➕ DLC & Yenilənmələr"},
+    {"id": "homebrew_apps", "name": "🛠️ Homebrew Proqramlar"}
+  ],
+  "games": [
+    {
+      "id": 1,
+      "title": "Grand Theft Auto V [EU] [EN] [1.27] [SP]",
+      "category": "ps4_games",
+      "size": "~60 GB",
+      "image": "https://images.purexbox.com/97da153cb7f94/grand-theft-auto-v-xbox-one.large.jpg",
+      "pkg_url": "https://archive.org/download/ps4-fpkg-collection-english-g/Grand%20Theft%20Auto%20V%20-%20%5BEU%5D%20%5BEN%5D%20%5B1.27%5D%20%5BSP%5D.pkg"
+    }
+  ]
+}
